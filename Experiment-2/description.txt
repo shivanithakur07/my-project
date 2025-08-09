@@ -26,4 +26,4 @@ Scenarios:
 Learning Outcomes:
 -> Understand how to center content using Flexbox.
 -> Learn how to create card-based UI components with shadows and padding.
--> Develop a clean and structured user interface without interactivity. ye description file mai
+-> Develop a clean and structured user interface without interactivity. 
