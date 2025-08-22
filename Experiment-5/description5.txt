@@ -1,0 +1,111 @@
+DYNAMIC PRODUCT FILTER WITH DROPDOWN USING JAVASCRIPT DOM MANIPULATION
+1. OBJECTIVE
+
+To create a web page that allows users to filter products dynamically using a dropdown menu. The filtering happens instantly through JavaScript DOM manipulation and event-driven logic, without reloading the page.
+
+2. FUNCTIONALITY DESCRIPTION
+
+HTML Structure:
+
+A dropdown (<select>) is provided with options: All, Clothing, Electronics, Books.
+
+A list of products is displayed inside a container <div id="product-list">.
+
+Each product is marked with a data-category attribute (e.g., "clothing", "electronics"), which helps JavaScript identify its category.
+
+CSS Styling:
+
+The container has borders and spacing for clarity.
+
+Products are styled as individual cards with padding, borders, and background color.
+
+Dropdown styling ensures ease of selection.
+
+JavaScript Logic:
+
+1.Element Selection:
+
+The dropdown is selected using document.getElementById("category").
+
+All product elements are collected using document.querySelectorAll(".product").
+
+2.Event Handling:
+
+An event listener is added to the dropdown (categorySelect.addEventListener("change", ...)).
+
+Each time the user changes the dropdown option, the callback function runs automatically.
+
+3.Filtering Mechanism:
+
+Inside the event handler, the selected option is stored in selectedCategory.
+
+The script loops over every product in the NodeList (products.forEach(...)).
+
+For each product:
+
+If selectedCategory === "all", the product is displayed (style.display = "block").
+
+Otherwise, the script checks the product’s data-category.
+
+If the category matches the selected one, the product remains visible.
+
+If not, it is hidden (style.display = "none").
+
+4.Dynamic Update:
+
+No refresh or reload is needed.
+
+The filtering works instantly because only the CSS display property is toggled via JavaScript.
+
+5.Scalability:
+
+New categories and products can be added simply by updating HTML.
+
+The JavaScript code works automatically for them because it depends on data-category.
+
+3. HTML STRUCTURE:
+
+<select id="category"> → Dropdown for selecting filter category.
+
+<option> elements → Choices (All, Clothing, Electronics, Books).
+
+<div id="product-list"> → Holds the list of product items.
+
+<div class="product" data-category="clothing">T-Shirt</div> → Example product with category tag.
+
+<script src="productfilter.js"> → Loads JavaScript logic for filtering.
+
+4. SCENARIO
+
+This setup simulates a basic e-commerce product filter similar to Amazon, Flipkart, or Myntra.
+For example, if a user selects “Electronics”, only electronic items like Smartphone and Headphones remain visible.
+Such filtering enhances usability and provides a smoother shopping experience without page reloads.
+
+5. LEARNING OUTCOMES
+
+1.Understanding JavaScript event-driven programming.
+
+2.Using getElementById() and querySelectorAll() to target DOM elements.
+
+3.Applying forEach() loops to iterate over multiple DOM elements.
+
+4.Using getAttribute() to read custom data attributes (data-category).
+
+5.Dynamically manipulating CSS properties (style.display) to show/hide content.
+
+6.Building scalable, reusable scripts for real-world applications.
+
+6. TEST CASES
+
+Default page load: All products should be visible.
+
+Select "Clothing": Only T-Shirt and Jeans appear.
+
+Select "Electronics": Only Smartphone and Headphones appear.
+
+Select "Books": Only Novel and Cookbook appear.
+
+Select "All": All products should reappear.
+
+if no product in a category : The product list should be empty.
+

@@ -1,0 +1,103 @@
+INTERACTIVE SVG DRAWING TOOL WITH MOUSE EVENT HANDLERS
+1. OBJECTIVE
+
+To design a web-based drawing tool using SVG and JavaScript, where users can interactively draw shapes or freehand lines by clicking and dragging the mouse inside an SVG canvas. This task emphasizes JavaScript DOM manipulation, SVG element creation, and advanced mouse event handling.
+
+2. FUNCTIONALITY DESCRIPTION
+
+HTML Structure
+
+A container <div> holds the drawing area and title.
+
+<svg id="drawing-area"> acts as the drawing canvas where paths are created dynamically.
+
+CSS Styling
+
+The drawing area (#drawing-area) has a border, light background, and cursor: crosshair to indicate drawing mode.
+
+The container adds padding and layout spacing for a neat UI.
+
+JavaScript Logic 
+
+1.Element Selection
+
+The SVG drawing area is targeted using document.getElementById("drawing-area").
+
+2.State Variables
+
+let drawing = false; → Keeps track of whether the user is currently drawing.
+
+let currentPath; → Stores the active <path> being drawn.
+
+3.Mouse Events
+
+mousedown 
+
+Starts the drawing process.
+
+A new <path> element is created using document.createElementNS(...).
+
+Stroke color, width, and fill are set.
+
+The mouse position (e.offsetX, e.offsetY) is recorded to start the path (M x y).
+
+The new path is appended to the SVG canvas.
+
+mousemove 
+
+Works only if drawing === true.
+
+Tracks the current mouse position.
+
+Retrieves the existing d attribute (path commands) of the active <path>.
+
+Appends a new line segment (L x y) to extend the drawing as the mouse moves.
+
+mouseup 
+
+Ends the drawing process by setting drawing = false.
+
+The active path remains on the canvas, allowing new drawings to start with another mouse drag.
+
+4.Dynamic Update
+
+The drawing happens in real time as the mouse moves.
+
+Multiple paths can be created sequentially — every new drag creates a new independent stroke.
+
+3. HTML STRUCTURE 
+
+<svg id="drawing-area" width="600" height="400"> → Defines the canvas for drawing.
+
+<script src="SVG.js"> → Links the JavaScript logic that handles interaction.
+
+4. SCENARIO
+
+This tool mimics a basic paint/drawing app.
+For example, a user can click and drag inside the SVG area to draw freehand lines (like using a pencil on paper). Each stroke is saved as an SVG <path>, which is scalable and editable.
+
+5. LEARNING OUTCOMES
+
+Understanding SVG as a graphics container.
+
+Using createElementNS() to generate SVG elements via JavaScript.
+
+Handling mouse events (mousedown, mousemove, mouseup) for interactive drawing.
+
+Managing path data (d attribute) to build continuous shapes.
+
+Implementing state tracking with flags (drawing variable) in event-driven programming.
+
+Developing a foundation for advanced drawing tools (brushes, erasers, shape tools).
+
+6. TEST CASES
+
+Click and drag across canvas: A continuous blue path should be drawn.
+
+Release mouse (mouseup): Drawing should stop immediately.
+
+Click and drag again: A new path should start from the new position.
+
+Quick click without dragging: A single point (small dot) should appear.
+
+Multiple strokes: Each drag produces an independent path, allowing layered drawings.
