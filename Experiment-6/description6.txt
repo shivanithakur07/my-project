@@ -1,103 +1,97 @@
-INTERACTIVE SVG DRAWING TOOL WITH MOUSE EVENT HANDLERS
-1. OBJECTIVE
+Canvas Drawing Tool
 
-To design a web-based drawing tool using SVG and JavaScript, where users can interactively draw shapes or freehand lines by clicking and dragging the mouse inside an SVG canvas. This task emphasizes JavaScript DOM manipulation, SVG element creation, and advanced mouse event handling.
+Objective:
 
-2. FUNCTIONALITY DESCRIPTION
+The objective of this project is to design an interactive web-based drawing tool using HTML5 Canvas and JavaScript. Users should be able to draw freehand shapes by dragging their mouse across the canvas and clear the canvas when needed. This project emphasizes mastering JavaScript event handling, canvas API usage, and real-time DOM manipulation.
 
-HTML Structure
+HTML Structure Explanation:
 
-A container <div> holds the drawing area and title.
+The HTML file defines the layout of the drawing tool:
 
-<svg id="drawing-area"> acts as the drawing canvas where paths are created dynamically.
+A <canvas> element (id="drawingCanvas") acts as the drawing area.
 
-CSS Styling
+A <button> (id="clearBtn") is provided to clear the canvas.
 
-The drawing area (#drawing-area) has a border, light background, and cursor: crosshair to indicate drawing mode.
+The structure is wrapped inside a .container for styling and better presentation.
 
-The container adds padding and layout spacing for a neat UI.
+CSS Styling Explanation:
 
-JavaScript Logic 
+The CSS enhances user experience and aesthetics:
 
-1.Element Selection
+A gradient background provides a modern look.
 
-The SVG drawing area is targeted using document.getElementById("drawing-area").
+The container has padding, rounded corners, and a soft shadow to make the tool visually appealing.
 
-2.State Variables
+The canvas has a blue border, hover scaling effect, and cursor styling to mimic a real drawing board.
 
-let drawing = false; → Keeps track of whether the user is currently drawing.
+The Clear button is styled with hover effects and smooth transitions for interactivity.
 
-let currentPath; → Stores the active <path> being drawn.
+JavaScript Explanation:
 
-3.Mouse Events
+The JavaScript file (drawing.js) controls the interactive behavior:
 
-mousedown 
+Canvas Setup:
 
-Starts the drawing process.
+getContext('2d') enables 2D drawing on the canvas.
 
-A new <path> element is created using document.createElementNS(...).
+Utility function getPos(e) calculates mouse position relative to the canvas.
 
-Stroke color, width, and fill are set.
+Drawing Logic with Events:
 
-The mouse position (e.offsetX, e.offsetY) is recorded to start the path (M x y).
+mousedown : Activates drawing mode and starts a new path at the cursor’s position.
 
-The new path is appended to the SVG canvas.
+mousemove : While drawing, lines follow the mouse pointer. Stroke properties such as color (#1e90ff), line width, and rounded edges are applied.
 
-mousemove 
+mouseup & mouseleave : Stop drawing and close the path.
 
-Works only if drawing === true.
+Clear Canvas Feature:
 
-Tracks the current mouse position.
+The Clear button uses ctx.clearRect(0, 0, canvas.width, canvas.height) to wipe the canvas completely.
 
-Retrieves the existing d attribute (path commands) of the active <path>.
+Scenario:
 
-Appends a new line segment (L x y) to extend the drawing as the mouse moves.
+Imagine a teacher preparing a digital whiteboard tool for online classes. Students can draw diagrams, flowcharts, or solve math problems directly on the browser without extra software. Similarly, a designer could use this tool as a quick sketchpad for drafting ideas. This shows how simple JavaScript-driven applications can replicate real-world drawing experiences in the browser.
 
-mouseup 
+Learning Outcomes:
 
-Ends the drawing process by setting drawing = false.
+Understand how to capture and handle mouse events (mousedown, mousemove, mouseup, mouseleave).
 
-The active path remains on the canvas, allowing new drawings to start with another mouse drag.
+Gain practical skills in using the HTML5 Canvas API for drawing.
 
-4.Dynamic Update
+Learn how to manipulate paths and drawing properties (stroke color, line width, line cap).
 
-The drawing happens in real time as the mouse moves.
+Apply DOM manipulation for features like clearing the canvas.
 
-Multiple paths can be created sequentially — every new drag creates a new independent stroke.
+See the integration of HTML, CSS, and JavaScript in creating an interactive application.
 
-3. HTML STRUCTURE 
+Test Cases:
 
-<svg id="drawing-area" width="600" height="400"> → Defines the canvas for drawing.
+1.Drawing Functionality
 
-<script src="SVG.js"> → Links the JavaScript logic that handles interaction.
+Action: Click and drag the mouse on the canvas.
 
-4. SCENARIO
+Expected: A smooth line follows the mouse pointer.
 
-This tool mimics a basic paint/drawing app.
-For example, a user can click and drag inside the SVG area to draw freehand lines (like using a pencil on paper). Each stroke is saved as an SVG <path>, which is scalable and editable.
+2.Stop Drawing on Mouse Release
 
-5. LEARNING OUTCOMES
+Action: Release the mouse button.
 
-Understanding SVG as a graphics container.
+Expected: Drawing should stop immediately.
 
-Using createElementNS() to generate SVG elements via JavaScript.
+3.Boundary Behavior
 
-Handling mouse events (mousedown, mousemove, mouseup) for interactive drawing.
+Action: Drag the mouse outside the canvas area.
 
-Managing path data (d attribute) to build continuous shapes.
+Expected: Drawing stops when leaving the canvas.
 
-Implementing state tracking with flags (drawing variable) in event-driven programming.
+4.Clear Button Functionality
 
-Developing a foundation for advanced drawing tools (brushes, erasers, shape tools).
+Action: Click the "Clear Canvas" button.
 
-6. TEST CASES
+Expected: The entire canvas should be wiped clean.
 
-Click and drag across canvas: A continuous blue path should be drawn.
+5.Multiple Drawings
 
-Release mouse (mouseup): Drawing should stop immediately.
+Action: Draw, stop, and then start again in another area.
 
-Click and drag again: A new path should start from the new position.
-
-Quick click without dragging: A single point (small dot) should appear.
-
-Multiple strokes: Each drag produces an independent path, allowing layered drawings.
+Expected: Multiple drawings appear until the canvas is cleared.
