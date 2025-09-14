@@ -42,3 +42,4 @@ class Person {
   
   outputDiv.appendChild(createCard(student1.displayInfo(), "student"));
   outputDiv.appendChild(createCard(teacher1.displayInfo(), "teacher"));
+  
