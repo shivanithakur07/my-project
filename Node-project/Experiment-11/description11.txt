@@ -1,0 +1,54 @@
+PROJECT: REST API for Playing Card Collection
+1. Technologies Used:
+
+a. Node.js: Provides the asynchronous runtime environment to run JavaScript on the server.
+b. Express.js: A lightweight framework used to build the RESTful API, manage routes, and handle HTTP requests.
+c. JavaScript (ES6+): Used for application logic, handling data operations, and managing endpoints.
+
+2. Project Overview:
+
+a. This project is a RESTful API designed to manage a collection of playing cards.
+b. It covers essential backend concepts such as routing, handling different HTTP methods (GET, POST, DELETE), and managing application data in memory.
+c. The goal was to create a clean and resource-oriented API following REST principles.
+d. It serves as an introductory project for learning backend development with Node.js and Express.
+
+3. Project File Structure:
+
+The project is kept simple, with a single main file containing the server setup, data management, and all endpoint logic, alongside supporting configuration files.
+
+node_modules/ → Installed dependencies (e.g., Express).
+
+package.json → Project configuration, metadata, and scripts.
+
+server.js → Main file with server setup and API endpoints.
+
+4. Structure:
+API Endpoints & Data Management:
+
+In-Memory Data Store: The application uses a JavaScript array to act as a temporary database, storing all card objects with unique IDs.
+
+Get All Cards (GET): Returns the full collection of cards as a JSON response.
+
+Get Card by ID (GET): Retrieves a single card using its unique identifier.
+
+Add New Card (POST): Creates and stores a new card with a unique ID, using data from the client request.
+
+Delete Card (DELETE): Removes a specific card identified by its ID from the collection.
+
+5. Learning Outcomes:
+
+a. Learned how to set up a basic Express.js server.
+b. Understood the design and implementation of RESTful APIs with clear, logical endpoints.
+c. Practiced handling multiple HTTP methods (GET, POST, DELETE) for CRUD operations.
+d. Gained knowledge of working with request parameters and request bodies.
+e. Implemented simple validation techniques to maintain data consistency.
+
+6. Key Concepts:
+
+a. RESTful API Principles
+b. Express.js Routing
+c. CRUD Operations (Create, Read, Delete)
+d. In-Memory Data Management
+e. HTTP Request/Response Cycle
+f. JSON Data Handling
+g. Express Middleware for parsing JSON
