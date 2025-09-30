@@ -1,0 +1,13 @@
+import PlayerList from "./components/PlayerList";
+
+function App() {
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Team Players</h1>
+      <PlayerList />
+    </div>
+  );
+
+}
+
+export default App;
