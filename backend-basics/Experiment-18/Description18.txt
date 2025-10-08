@@ -1,0 +1,169 @@
+BANK TRANSFER API WITH JWT AUTHENTICATION AND MONGODB USING EXPRESS.JS
+1. OBJECTIVE
+
+The objective of this project is to build a secure bank transfer REST API using Express.js, MongoDB, and JWT-based authentication.
+The API allows users to:
+
+Register new accounts with secure password storage using bcrypt.
+
+Login to obtain a JWT token for authenticated requests.
+
+Transfer funds between accounts securely while preventing overdrafts.
+
+Ensure proper error handling and atomic balance updates.
+
+This project demonstrates real-world banking logic in a web backend environment with security, authentication, and database operations.
+
+2. FUNCTIONALITY DESCRIPTION
+Environment & Server Setup:
+
+MongoDB is used as the database, connected via a connection string.
+
+JWT secret is used to sign and verify tokens for authentication.
+
+The Express.js server listens on port 3000 and parses JSON payloads from incoming requests.
+
+Database & Schema Design (MongoDB / Mongoose):
+
+Users are stored in a User collection with the following fields:
+
+name – Full name of the user (required).
+
+username – Unique identifier for login (required).
+
+password – Hashed using bcrypt for security.
+
+balance – Numeric account balance with a default value.
+
+The schema ensures unique usernames and secure password storage, preventing unauthorized access.
+
+Authentication & Security:
+
+JWT Authentication Middleware:
+
+Extracts the token from the Authorization header.
+
+Verifies the token to allow access to protected routes.
+
+Attaches the user information from the token to the request object for further use.
+
+Denies access if the token is missing, invalid, or expired.
+
+Passwords are never returned in API responses.
+
+JWT tokens ensure only authorized users can perform fund transfers.
+
+Atomic debit operations prevent overdraft and maintain database consistency.
+
+API Routes & Operations:
+
+User Registration (/register):
+
+Creates a new user account with hashed password.
+
+Sets an initial balance (default or user-provided).
+
+Returns user details without the password.
+
+User Login (/login):
+
+Validates username and password.
+
+Returns a JWT token for authenticated API access.
+
+Includes user ID in the response.
+
+Create Sample Users (/create-users):
+
+Initializes test accounts (e.g., Alice and Bob).
+
+Clears previous data to maintain a clean test setup.
+
+Returns created users with their balances.
+
+Fund Transfer (/transfer – Protected Route):
+
+Validates sender, receiver, and transfer amount.
+
+Ensures the authenticated user matches the sender.
+
+Debits sender atomically and credits the receiver.
+
+Implements manual compensation to refund the sender if receiver update fails.
+
+Handles errors such as insufficient funds, invalid accounts, or invalid input.
+
+Returns updated balances and success message upon completion.
+
+Error Handling & Security Measures:
+
+Atomic balance updates prevent concurrent overdrafts.
+
+Unauthorized access attempts are blocked with proper HTTP status codes.
+
+Invalid input, insufficient funds, or non-existent accounts are handled gracefully.
+
+Passwords are securely hashed and never exposed.
+
+JWT authentication ensures that sensitive routes are accessible only to valid users.
+
+3. FILE STRUCTURE & COMPONENTS
+
+The project is organized into a single server.js file containing:
+
+MongoDB connection setup and User schema definition.
+
+Express server setup with JSON parsing middleware.
+
+JWT authentication middleware for protected routes.
+
+User-related routes: registration, login, and sample user creation.
+
+Fund transfer route with secure balance update logic.
+
+Server listener to handle incoming requests on port 3000.
+
+4. SCENARIO
+
+This API simulates a basic banking system:
+
+Users can create accounts, login, and securely transfer funds between accounts.
+
+Only authenticated users can initiate transfers from their own accounts.
+
+Atomic debit and credit operations maintain database consistency and prevent overdrafts.
+
+Example workflow:
+
+Alice transfers $200 to Bob.
+
+Alice’s balance decreases, Bob’s balance increases.
+
+If Bob’s account does not exist, Alice’s funds are automatically refunded.
+
+The API ensures secure and reliable transactions, simulating real-world banking operations.
+
+5. LEARNING OUTCOMES
+
+Implement JWT-based authentication for REST APIs.
+
+Secure user data using bcrypt password hashing.
+
+Perform atomic database updates in MongoDB to maintain consistency.
+
+Handle asynchronous operations and errors effectively.
+
+Secure sensitive routes and actions using middleware.
+
+Apply real-world banking logic in a backend application environment.
+
+6. TEST CASES
+Test                               Case	Action	                                        Expected Output
+1. Register User	          POST /register with name, username, password	          201 Created – user info returned (without password)
+2. Login User	              POST /login with valid credentials	                    200 OK – JWT token returned
+3. Unauthorized Transfer    POST /transfer without JWT	                            401 Access denied
+4. Valid Transfer	          POST /transfer with JWT, valid sender/receiver/amount	  200 OK – balances updated
+5. Insufficient Funds	      Transfer amount > sender balance	                      400 – 'Insufficient balance'
+6. Invalid Receiver	        Transfer to non-existent account	                      404 – Sender refunded
+7. Create Sample Users	    POST /create-users	                                    201 – Alice and Bob created with balances
+8. Token Expiry	            Use expired JWT token	                                  400 – 'Invalid token'
