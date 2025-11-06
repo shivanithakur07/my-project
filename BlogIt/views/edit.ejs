@@ -1,0 +1,99 @@
+<%- layout('./layouts/boilerplate.ejs') %>
+
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="card-title mb-3">Edit blog</h1>
+
+          <% if (!blog) { %>
+          <div class="alert alert-warning">Blog not found.</div>
+          <% } else { %> <% if (typeof errors !== 'undefined' && errors &&
+          errors.length) { %>
+          <div class="alert alert-danger">
+            <ul class="mb-0">
+              <% errors.forEach(function(err){ %>
+              <li><%= err.msg || err %></li>
+              <% }) %>
+            </ul>
+          </div>
+          <% } %>
+
+          <form
+            id="editBlogForm"
+            action="/blogs/<%= blog._id %>?_method=PUT"
+            method="POST"
+            novalidate
+          >
+            <% if (typeof csrfToken !== 'undefined') { %>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <% } %>
+
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="blog[title]"
+                required
+                minlength="3"
+                value="<%= typeof formData !== 'undefined' && formData.title ? formData.title : blog.title %>"
+              />
+              <div class="invalid-feedback">
+                Please enter a title (3+ characters).
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="content" class="form-label">Content</label>
+              <textarea
+                class="form-control"
+                id="content"
+                name="blog[content]"
+                rows="10"
+                required
+                minlength="10"
+              >
+<%= typeof formData !== 'undefined' && formData.content ? formData.content : blog.content %></textarea
+              >
+              <div class="invalid-feedback">
+                Please enter some content (10+ characters).
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <a href="/blogs/<%= blog._id %>" class="btn btn-outline-secondary"
+                >Cancel</a
+              >
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+    var form = document.getElementById("editBlogForm");
+    if (!form) return;
+    form.addEventListener(
+      "submit",
+      function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  })();
+</script>

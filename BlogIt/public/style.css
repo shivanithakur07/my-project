@@ -1,0 +1,108 @@
+:root {
+  --color-primary: #123ac0;
+  --color-primary-hover: #04238b;
+  --color-white: #ffffff;
+  --color-black: #060318;
+  --color-error: #ef4444;
+  --color-success: #166534;
+  --color-text-dark: #374151;
+  --color-text-gray: #64748b;
+  --color-text-form: #9ca3af;
+  --color-gray-border: #e7e7e9;
+}
+
+.flash-message {
+  position: fixed;
+  z-index: 2000;
+  top: 20px;
+  right: 20px;
+  min-width: 320px;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-out 4.7s;
+  animation-fill-mode: forwards;
+  margin-bottom: 10px;
+}
+
+.flash-content {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.flash-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.flash-text {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.flash-close {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.flash-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.flash-success {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
+}
+
+.flash-success .flash-close:hover {
+  background-color: var(--color-gray-border);
+}
+
+.flash-error {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+}
+
+.flash-error .flash-close:hover {
+  background-color: var(--color-gray-border);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .flash-message {
+    left: 20px;
+    right: 20px;
+    min-width: auto;
+    max-width: none;
+  }
+}
