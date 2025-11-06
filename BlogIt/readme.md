@@ -107,6 +107,7 @@ A modern, full-stack blogging platform built with Node.js, Express, MongoDB, and
 | POST   | `/user/signup`  | Register user | No            |
 | POST   | `/user/logout`  | Logout user   | Yes           |
 
-Built with ❤️ by Aman
+Built with ❤️ by Shivani Thakur
 
 **Note**: This is a capstone project demonstrating full-stack web development skills with Node.js, Express, MongoDB, and modern web technologies.# BlogIt
+
