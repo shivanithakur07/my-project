@@ -1,0 +1,72 @@
+<%- layout('./layouts/boilerplate.ejs') %>
+
+<main class="container my-5">
+  <div class="row">
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <div class="mb-3">
+            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px; font-size: 2.5rem;">
+              <%= currentUser.username.charAt(0).toUpperCase() %>
+            </div>
+          </div>
+          <h3 class="card-title mb-2"><%= currentUser.username %></h3>
+          <% if (currentUser.email) { %>
+            <p class="text-muted mb-3">
+              <i class="bi bi-envelope"></i> <%= currentUser.email %>
+            </p>
+          <% } %>
+          <hr>
+          <div class="d-grid gap-2">
+            <p class="mb-2"><strong>Total Blogs:</strong> <%= userBlogs.length %></p>
+            <a href="/blogs/new" class="btn btn-primary">Create New Blog</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h4 mb-0">My Blogs</h2>
+      </div>
+
+      <% if (!userBlogs || userBlogs.length === 0) { %>
+        <div class="alert alert-info">
+          You haven't created any blogs yet. <a href="/blogs/new" class="alert-link">Create your first blog</a>.
+        </div>
+      <% } else { %>
+        <div class="row row-cols-1 g-3">
+          <% userBlogs.forEach(function(blog){ %>
+            <div class="col">
+              <div class="card shadow-sm h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0"><%= blog.title %></h5>
+                    <span class="badge bg-secondary">
+                      <%= new Date(blog.createdAt).toLocaleDateString() %>
+                    </span>
+                  </div>
+                  
+                  <p class="card-text text-muted mb-3">
+                    <% var excerpt = (blog.content || '').substring(0, 150); %>
+                    <%= excerpt %><%= (blog.content && blog.content.length > 150) ? '...' : '' %>
+                  </p>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <a href="/blogs/<%= blog._id %>" class="btn btn-sm btn-outline-primary me-2">View</a>
+                      <a href="/blogs/<%= blog._id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    </div>
+                    <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Delete this blog?');">
+                      <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</main>

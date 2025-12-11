@@ -1,0 +1,68 @@
+LIVE CHARACTER COUNTER EXPERIMENT
+1. OBJECTIVE:
+To design and implement a web page using HTML, CSS, and JavaScript that provides a live character counter. The counter dynamically updates as the user types in a textarea, enhancing interactivity and user feedback without requiring page reloads.
+
+2. FUNCTIONALITY DESCRIPTION:
+
+HTML Structure:
+The HTML defines a container with a heading, a textarea for typing, and a <span> element inside a <div> to display the live character count.
+
+External CSS (CharacterCounter.css) is linked for styling.
+
+External JavaScript (Character.js) is linked to handle functionality.
+
+CSS Styling:
+The body uses a simple font and white background.
+
+.container has a border, padding, and margin to create a neat typing box layout.
+
+The textarea is styled with padding, monospace font, resizable height, and highlighted border on focus.
+
+.character styles the counter text with bold font and black color for emphasis.
+
+JavaScript Logic:
+The textarea (id="text1") and counter span (id="character1") are selected using getElementById().
+
+An input event listener is attached to the textarea.
+
+Each time the user types or deletes characters, the script calculates the length of the input (textarea.value.length) and updates the counter instantly.
+
+3. HTML STRUCTURE:
+<div class="container"> → Holds the entire character counter box.
+
+<h3> → Heading for the tool.
+
+<textarea id="text1"> → Input area where users type.
+
+<div class="character"> → Displays the label "Characters:" with a <span> (id="character1") for live count.
+
+<link> → Connects external CSS file.
+
+<script> → Connects external JavaScript file.
+
+4. SCENARIO:
+In modern applications, users often need to know character limits while typing (e.g., Twitter, SMS, or form fields). This tool helps users track their input in real time. The counter provides instant feedback, preventing them from exceeding character limits and improving usability.
+
+5. LEARNING OUTCOMES:
+Understanding integration of HTML, CSS, and JavaScript in a single project.
+
+Learning to use event listeners for real-time input handling.
+
+Using DOM manipulation to update page content dynamically.
+
+Applying basic CSS styling to enhance readability and user experience.
+
+Building a practical feature that can be reused in larger applications like forms and text editors.
+
+6. TEST CASES:
+On page load: Counter should display 0.
+
+Typing "Hello": Counter should update to 5.
+
+Deleting text: Counter decreases accordingly.
+
+Typing long input (e.g., 100 characters): Counter should match the exact length.
+
+Copy-paste text into textarea: Counter updates instantly to show pasted content length.
+
+Clear all text: Counter resets to 0.

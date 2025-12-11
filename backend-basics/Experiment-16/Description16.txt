@@ -1,0 +1,88 @@
+USER MANAGEMENT API WITH AUTHENTICATION AND LOGGING USING EXPRESS.JS
+1. OBJECTIVE
+
+The main objective of this project is to develop a RESTful API using Express.js that enables users to perform CRUD (Create, Read, Update, Delete) operations on user data.
+It also demonstrates the implementation of middleware for request logging and Bearer token authentication to protect specific routes and ensure secure data access.
+
+2. FUNCTIONALITY DESCRIPTION
+Server Setup:
+
+The server is created using Express.js and runs on port 3000.
+It uses JSON parsing middleware to handle data from client requests. The application maintains an in-memory data structure to store user details dynamically, allowing users to be added, viewed, updated, and deleted without using a database.
+
+Middleware Logic:
+
+Request Logging Middleware:
+This middleware logs important details of every incoming request, including the HTTP method, URL, and timestamp.
+It is mainly used for debugging, activity tracking, and system monitoring, providing transparency of user actions within the API.
+
+Authentication Middleware:
+The authentication middleware ensures secure access control by validating a Bearer token sent in the authorization header.
+Only requests with the correct token are granted access to protected routes, while others receive a 403 Forbidden response.
+This mechanism simulates admin-level authorization within the system.
+
+Routes Description:
+
+POST /users – Adds a new user to the in-memory list.
+
+GET /users – Retrieves and displays all stored users.
+
+PUT /users/:id – Updates the details of a specific user identified by their ID.
+
+DELETE /users/:id – Deletes a user from the list using their ID.
+
+Each route represents one of the CRUD operations, providing a complete data management interface for users.
+
+Admin Router:
+
+A separate router is used for handling admin-related functionalities under the /admin path.
+All admin routes are protected using authentication middleware, ensuring that only authorized users with valid tokens can access them.
+The admin routes demonstrate restricted access and modular route organization in Express.js.
+
+3. FILE STRUCTURE
+
+The project consists of a single main file named server.js, which contains all middleware, routes, and server configuration.
+
+The file includes:
+
+Middleware setup for JSON parsing and request logging.
+
+Route definitions for user management (/users routes).
+
+Admin router protected with authentication middleware.
+
+A server that listens on port 3000 for handling client requests.
+
+4. SCENARIO
+
+This project simulates a university user management system where student records can be created, viewed, updated, and deleted.
+Only authorized administrators can access restricted routes such as the admin dashboard.
+The logging middleware keeps a record of all user and admin activities, making it easier to monitor system usage and detect unauthorized access attempts.
+
+For example, an admin with a valid Bearer token can access /admin/dashboard, while normal users are restricted to the /users routes for CRUD operations.
+
+5. LEARNING OUTCOMES
+
+Understanding the concept and flow of middleware in Express.js.
+
+Implementing Bearer token authentication for secure access control.
+
+Performing CRUD operations using RESTful principles.
+
+Organizing routes effectively using Express Routers.
+
+Applying logging techniques to track API usage and debug issues.
+
+Developing a secure, modular, and efficient backend using Node.js and Express.js.
+
+6. TEST CASES
+Test                        Case	Action	                                                  Expected Output
+1. Add User             POST /users with user data	                             201 Created – User added successfully
+2. Get Users	          GET /users	                                             200 OK – List of users displayed
+3. Update User	        PUT /users/:id with updated details	                     200 OK – User information updated
+4. Delete User	        DELETE /users/:id	                                       200 OK – User deleted successfully
+5. Unauthorized         GET /admin/dashboard without token                       403 Forbidden – Access denied
+   Admin Access	
+6. Authorized Admin     GET /admin/dashboard with valid token                    200 OK – “Admin dashboard” displayed
+   Access	
+7. Logging Check        Make any API request                                     Console displays request method and timestamp

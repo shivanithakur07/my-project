@@ -1,0 +1,80 @@
+Objective:
+To containerize a React application using a multi-stage Docker build for optimized image size and easy deployment via Nginx.
+
+Project Setup (React Frontend)
+
+React Application:
+The frontend is built using React. You can either clone an existing project or create a new React app in your project directory.
+
+Code Customization:
+Edit src/App.js and src/App.css to design and style your application as needed. This allows you to implement your desired UI and functionality.
+
+Docker Integration
+
+Multi-Stage Dockerfile:
+A multi-stage Dockerfile is used to build the React app and serve it via Nginx. Multi-stage builds ensure:
+
+Development dependencies are excluded from the final image.
+
+Only the production build is included, keeping the image size small (~81MB).
+
+.dockerignore Configuration:
+The .dockerignore file prevents unnecessary files (like node_modules, logs, and local config) from being copied into the Docker image, further reducing image size.
+
+Build Steps:
+
+Install dependencies:
+
+npm install
+
+
+Build the Docker image:
+
+docker build -t exp25:latest .
+
+
+Run Container:
+Start the container with port mapping so the app can be accessed via a browser:
+
+docker run -d -p 8080:80 --name exp25-container exp25:latest
+
+
+Verify Deployment:
+
+Open your browser at http://localhost:8080
+ to view the app.
+
+Check the image size using:
+
+docker images exp25:latest
+
+
+How the System Works Together
+
+React builds the frontend into static files (build folder).
+
+Nginx serves these static files efficiently in a production-ready environment.
+
+Multi-stage Docker build ensures only production files are included, keeping the image lightweight.
+
+Any code changes require rebuilding the image and restarting the container to update the deployed app.
+
+Learning Outcomes
+
+React Production Build: Learned how to build and serve a production-ready React app.
+
+Docker Multi-Stage Builds: Gained experience in creating optimized Docker images using multi-stage builds.
+
+Container Deployment: Understood containerization and running apps via Docker with port mapping.
+
+Frontend Deployment via Nginx: Learned how Nginx serves static files efficiently in production.
+
+Use Cases
+
+Web Application Deployment: Easily deploy any React application in a lightweight Docker container.
+
+CI/CD Integration: Suitable for automated build and deployment pipelines.
+
+Microservices Frontend Hosting: Host frontend services separately in containers for scalable architecture.
+
+Local Development Testing: Quickly run production-like environments locally before deploying.

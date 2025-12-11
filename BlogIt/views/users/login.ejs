@@ -1,0 +1,66 @@
+<%- layout('./layouts/boilerplate.ejs') %>
+
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title mb-3">Login</h2>
+
+          <form id="loginForm" action="/user/login" method="POST" novalidate>
+            <% if (typeof csrfToken !== 'undefined') { %>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <% } %>
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+              <div class="invalid-feedback">Enter your username.</div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+              <div class="invalid-feedback">Enter your password.</div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="/user/signup" class="small">Create account</a>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+    var form = document.getElementById("loginForm");
+    if (!form) return;
+    form.addEventListener(
+      "submit",
+      function (e) {
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  })();
+</script>

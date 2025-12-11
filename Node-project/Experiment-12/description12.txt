@@ -1,0 +1,66 @@
+PROJECT: Concurrent Ticket Booking API with Seat Locking
+1. Technologies Used:
+
+a. Node.js: Provides an asynchronous, event-driven runtime environment.
+b. Express.js: Used as the web framework for building the RESTful API, managing routes, and handling requests.
+c. JavaScript (ES6+): Implements the application’s logic, concurrency handling, and state management.
+
+2. Project Overview:
+
+a. Simulates a ticket booking system with concurrency management.
+b. Introduces a temporary seat-locking mechanism to prevent double bookings.
+c. Practices server-side state management, asynchronous operations with timers, and concurrency-safe API design.
+d. Serves as a foundation for multi-user, stateful backend systems in Node.js.
+
+3. Project File Structure:
+Experiment-12/
+├── node_modules/         # Installed dependencies (Express, etc.)
+├── package.json          # Project metadata and dependency list
+└── index.js              # Main server file with core application logic
+
+4. Structure:
+
+API Endpoints & State Management:
+
+Built around a central in-memory seat object that tracks the status of each seat.
+
+Implements three main operations: viewing, locking, and confirming bookings.
+
+i. In-Memory State & Configuration:
+
+Uses a JavaScript object to represent seat data.
+
+Defines a lock timeout duration to auto-release locks.
+
+ii. Seat Locking Endpoint (POST /lock/:seatId):
+
+Checks if a seat is available.
+
+Locks the seat temporarily and prevents others from accessing it.
+
+Starts a timer to auto-release the seat if not confirmed in time.
+
+iii. Booking Confirmation Endpoint (POST /confirm/:seatId):
+
+Validates if the seat is locked and the lock is still valid.
+
+Converts the seat’s status to booked if confirmed within the lock period.
+
+Ensures only valid locks can be converted to bookings.
+
+5. Learning Outcomes:
+
+a. Learned in-memory state management using JavaScript objects.
+b. Designed a RESTful API architecture with well-defined endpoints.
+c. Understood the HTTP request/response cycle using Express.
+d. Implemented server-side validation for error handling and user safety.
+e. Practiced asynchronous programming and concurrency control with timers.
+
+6. Key Concepts:
+
+a. In-Memory State Management
+b. RESTful API Design & Routing
+c. HTTP Request/Response Cycle (req/res)
+d. URL Parameters (req.params)
+e. Asynchronous Operations (timers and callbacks)
+f. Concurrency Control & Race Condition Prevention

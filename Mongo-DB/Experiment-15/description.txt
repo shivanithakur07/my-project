@@ -1,0 +1,104 @@
+E-commerce Catalog with Nested Document Structure in MongoDB
+Objective
+
+The objective of this experiment is to design and implement a MongoDB-based e-commerce catalog using nested documents in Mongoose. The goal is to demonstrate how real-world products with multiple variants (color, size, stock) can be modeled efficiently inside a single collection. This task strengthens your knowledge of MongoDB schema design, nested document arrays, querying techniques, and API route implementation using Node.js and Express.
+
+Introduction
+
+MongoDB is a NoSQL, document-oriented database that stores data in JSON-like documents. Unlike relational databases, it allows hierarchical or nested data structures to exist within a single collection, eliminating the need for complex joins.
+
+In e-commerce applications, a product can have multiple variants (e.g., different colors, sizes, stock levels). Instead of separating this information into multiple tables, MongoDB allows embedding this data directly inside the product document.
+
+This experiment uses Mongoose models and Express routes to manage an e-commerce catalog with nested variants. CRUD operations are exposed through RESTful APIs, making it easy to seed sample data, retrieve all products, filter products by category, and query for specific variant details.
+
+Experiment Overview
+
+This experiment focuses on:
+
+Creating a Mongoose schema for products with nested variants.
+
+Implementing API routes to insert and query product data.
+
+Using MongoDB’s nested document structure to efficiently model product hierarchies.
+
+Performing queries that filter products by category and project only matching variants.
+
+Methodology
+
+1. Data Modeling
+
+Define a Product schema with fields: name, price, category, description.
+
+Embed an array of variants inside the product, where each variant includes color, size, and stock.
+
+Add schema-level validations (e.g., required fields, enums for categories and sizes).
+
+2. Data Insertion
+
+Create a /seed route that clears the database and inserts sample products across categories (Apparel, Electronics, Accessories).
+
+Each product contains multiple variants for testing.
+
+3. Querying and Retrieval
+
+Retrieve all products using GET /api/products.
+
+Filter products by category using GET /api/products/filter?category=Apparel.
+
+Project specific variant details using GET /api/products/variants/:color, where only matching variants are returned.
+
+4. API Implementation
+
+Implement routes in Express (routes/products.js).
+
+Use Mongoose queries (find, aggregate, insertMany) to handle operations.
+
+Send JSON responses with success, message, count, and data fields for clarity.
+
+Analysis
+
+All product data, including variants, resides in a single collection, avoiding the need for separate variant tables.
+
+Queries efficiently retrieve both top-level product data and nested variant details.
+
+Using $filter in MongoDB aggregation allows projecting only the required nested objects.
+
+Schema validation ensures clean and consistent data insertion.
+
+Observations
+
+Nested arrays (variants) allow representing real-world hierarchies naturally.
+
+Filtering by category is straightforward using indexed fields.
+
+Projecting specific variants reduces unnecessary data transfer.
+
+MongoDB’s schema flexibility makes it easy to add new product attributes without redesigning the schema.
+
+Conclusion
+
+This experiment demonstrates how MongoDB with Mongoose can model an e-commerce catalog efficiently using nested document structures. By embedding variants inside product documents, the system achieves simplicity, faster queries, and schema flexibility. The Express-based API provides endpoints for seeding data, fetching all products, filtering, and projecting variant details, making it highly suitable for modern e-commerce platforms.
+
+Applications
+
+E-commerce platforms for managing product catalogs with multiple variants.
+
+Inventory management systems tracking stock by size/color.
+
+Retail or fashion apps needing flexible schema designs for products.
+
+Content management systems (CMS) requiring hierarchical data modeling.
+
+Learning Outcomes
+
+After completing this experiment, you will be able to:
+
+Design a Mongoose schema with nested documents.
+
+Implement API routes for inserting, retrieving, and filtering data.
+
+Use aggregation pipelines and $filter to query nested arrays.
+
+Understand how MongoDB’s flexible schema simplifies real-world data modeling.
+
+Build a foundation for developing scalable e-commerce backends.

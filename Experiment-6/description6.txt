@@ -1,0 +1,97 @@
+Canvas Drawing Tool
+
+Objective:
+
+The objective of this project is to design an interactive web-based drawing tool using HTML5 Canvas and JavaScript. Users should be able to draw freehand shapes by dragging their mouse across the canvas and clear the canvas when needed. This project emphasizes mastering JavaScript event handling, canvas API usage, and real-time DOM manipulation.
+
+HTML Structure Explanation:
+
+The HTML file defines the layout of the drawing tool:
+
+A <canvas> element (id="drawingCanvas") acts as the drawing area.
+
+A <button> (id="clearBtn") is provided to clear the canvas.
+
+The structure is wrapped inside a .container for styling and better presentation.
+
+CSS Styling Explanation:
+
+The CSS enhances user experience and aesthetics:
+
+A gradient background provides a modern look.
+
+The container has padding, rounded corners, and a soft shadow to make the tool visually appealing.
+
+The canvas has a blue border, hover scaling effect, and cursor styling to mimic a real drawing board.
+
+The Clear button is styled with hover effects and smooth transitions for interactivity.
+
+JavaScript Explanation:
+
+The JavaScript file (drawing.js) controls the interactive behavior:
+
+Canvas Setup:
+
+getContext('2d') enables 2D drawing on the canvas.
+
+Utility function getPos(e) calculates mouse position relative to the canvas.
+
+Drawing Logic with Events:
+
+mousedown : Activates drawing mode and starts a new path at the cursor’s position.
+
+mousemove : While drawing, lines follow the mouse pointer. Stroke properties such as color (#1e90ff), line width, and rounded edges are applied.
+
+mouseup & mouseleave : Stop drawing and close the path.
+
+Clear Canvas Feature:
+
+The Clear button uses ctx.clearRect(0, 0, canvas.width, canvas.height) to wipe the canvas completely.
+
+Scenario:
+
+Imagine a teacher preparing a digital whiteboard tool for online classes. Students can draw diagrams, flowcharts, or solve math problems directly on the browser without extra software. Similarly, a designer could use this tool as a quick sketchpad for drafting ideas. This shows how simple JavaScript-driven applications can replicate real-world drawing experiences in the browser.
+
+Learning Outcomes:
+
+Understand how to capture and handle mouse events (mousedown, mousemove, mouseup, mouseleave).
+
+Gain practical skills in using the HTML5 Canvas API for drawing.
+
+Learn how to manipulate paths and drawing properties (stroke color, line width, line cap).
+
+Apply DOM manipulation for features like clearing the canvas.
+
+See the integration of HTML, CSS, and JavaScript in creating an interactive application.
+
+Test Cases:
+
+1.Drawing Functionality
+
+Action: Click and drag the mouse on the canvas.
+
+Expected: A smooth line follows the mouse pointer.
+
+2.Stop Drawing on Mouse Release
+
+Action: Release the mouse button.
+
+Expected: Drawing should stop immediately.
+
+3.Boundary Behavior
+
+Action: Drag the mouse outside the canvas area.
+
+Expected: Drawing stops when leaving the canvas.
+
+4.Clear Button Functionality
+
+Action: Click the "Clear Canvas" button.
+
+Expected: The entire canvas should be wiped clean.
+
+5.Multiple Drawings
+
+Action: Draw, stop, and then start again in another area.
+
+Expected: Multiple drawings appear until the canvas is cleared.

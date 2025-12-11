@@ -1,0 +1,79 @@
+Employee Management System 
+
+This program is a command-line employee management system developed using Node.js. It allows the user to manage employee records interactively through a menu-driven interface.
+
+Key Points
+
+1.Purpose
+
+To maintain a list of employees.
+
+To allow operations such as adding new employees, viewing the list, and removing employees.
+
+2.Data Handling
+
+Employees are stored in memory as records, each having two attributes:
+
+Name (the employee’s name).
+
+ID (a unique identifier).
+
+3.Menu Options
+
+Add Employee:
+Prompts the user for the employee’s name and ID. It ensures the input is not empty and prevents duplicate IDs before adding the employee.
+
+List Employees:
+Displays all employees with their name and ID. If no employees exist, it shows a message that the list is empty.
+
+Remove Employee:
+Asks for an employee ID and removes the corresponding employee if found. If the ID does not exist, it notifies the user.
+
+Exit:
+Terminates the program gracefully with a goodbye message.
+
+4.Validation and Error Handling
+
+Prevents empty names or IDs.
+
+Ensures IDs are treated consistently (case-insensitive).
+
+Handles invalid menu choices by guiding the user to enter a valid option.
+
+5.Flow of the Program
+
+The system repeatedly displays the menu until the user chooses to exit.
+
+Based on the user’s choice, it performs the requested operation (add, list, remove, or exit).
+
+The loop continues, keeping the program interactive.
+
+Learning Outcomes:
+
+By working with this program, a learner will be able to:
+
+Understand how to design a menu-driven CLI application.
+
+Gain hands-on experience in user input handling using Node.js.
+
+Apply basic data validation techniques to ensure correctness of inputs.
+
+Perform array operations such as insertion, searching, listing, and deletion.
+
+Develop logical thinking by implementing control flow with loops and conditions.
+
+Practice error handling for invalid inputs and duplicate records.
+
+Use Cases:
+
+This type of system can be applied in real-world scenarios such as:
+
+Small-scale HR systems – to quickly keep track of employees in a startup or small office.
+
+Student records – managing IDs and names of students in a class.
+
+Inventory management – tracking items using item name and unique ID.
+
+Library management – storing book titles with unique identifiers.
+
+Training projects – a beginner-friendly project for understanding input/output handling and data structures.

@@ -1,0 +1,112 @@
+<%- layout('./layouts/boilerplate.ejs') %>
+
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <% if (!blog) { %>
+      <div class="alert alert-warning">Blog not found.</div>
+      <% } else { %>
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <h1 class="card-title"><%= blog.title %></h1>
+          <div class="text-muted mb-3">
+            <% if (blog.createdAt) { %>
+            <small>Published: <%= blog.createdAt.toLocaleString() %></small>
+            <% } %> <% if (blog.owner) { %>
+            <small class="ms-3">by <%= blog.owner.username %></small>
+            <% } %>
+          </div>
+
+          <hr />
+
+          <div class="blog-content">
+            <%- (blog.content || '').replace(/\n/g, '<br />') %>
+          </div>
+        </div>
+        <div class="card-footer bg-white d-flex justify-content-between">
+          <div>
+            <% if(currentUser && blog.owner && blog.owner.id == currentUser.id) { %>
+            <a
+              class="btn btn-outline-primary me-2"
+              href="/blogs/<%= blog._id %>/edit"
+              >Edit</a
+            >
+            <form
+              action="/blogs/<%= blog._id %>?_method=DELETE"
+              method="POST"
+              class="d-inline"
+              onsubmit="return confirm('Delete blog?');"
+            >
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mt-4">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Comments (<%= blog.comments ? blog.comments.length : 0 %>)</h5>
+        </div>
+        <div class="card-body">
+          <% if (currentUser) { %>
+            <form action="/blogs/<%= blog._id %>/comments" method="POST" class="mb-4">
+              <div class="mb-3">
+                <label for="comment" class="form-label">Add a comment</label>
+                <textarea 
+                  class="form-control" 
+                  id="comment" 
+                  name="comment" 
+                  rows="3" 
+                  required 
+                  minlength="1" 
+                  maxlength="500"
+                  placeholder="Share your thoughts..."
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Post Comment</button>
+            </form>
+            <hr>
+          <% } else { %>
+            <div class="alert alert-info">
+              <a href="/user/login" class="alert-link">Login</a> to comment on this blog.
+            </div>
+          <% } %>
+
+          <% if (blog.comments && blog.comments.length > 0) { %>
+            <div class="comments-list">
+              <% blog.comments.slice().reverse().forEach(function(comment) { %>
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                      <div>
+                        <strong class="text-primary">
+                          <%= comment.author && comment.author.username ? comment.author.username : 'Anonymous' %>
+                        </strong>
+                        <small class="text-muted ms-2">
+                          <%= comment.createdAt ? new Date(comment.createdAt).toLocaleString() : '' %>
+                        </small>
+                      </div>
+                      <% if (currentUser && comment.author && (currentUser.id === comment.author.id || currentUser.id === blog.owner.id)) { %>
+                        <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Delete this comment?');">
+                          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                      <% } %>
+                    </div>
+                    <p class="mb-0"><%= comment.text %></p>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          <% } else { %>
+            <p class="text-muted text-center">No comments yet. Be the first to comment!</p>
+          <% } %>
+        </div>
+      </div>
+
+      <% } %>
+    </div>
+  </div>
+</main>
+
+<%- include('layouts/footer') %>
